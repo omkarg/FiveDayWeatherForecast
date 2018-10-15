@@ -12,14 +12,21 @@ class NetworkManager
 {
     static let shared = NetworkManager()
     let sharedSession = URLSession.shared
+    var requestInProcess = false
     
     private init(){}
     
     func get5DayWeatherForecast(completion: @escaping ([String: Any]?,NSError?) -> Void) {
+        if requestInProcess {
+            completion(nil,nil)
+        }
+        
         DispatchQueue.global(qos: .background).async {
             if let url = URL(string: fiveDayWeatherForecastURL) {
                 let request = URLRequest(url: url)
+                self.requestInProcess = true
                 let dataTask = self.sharedSession.dataTask(with: request) { (data, response, error) -> Void in
+                    self.requestInProcess = false
                     if error == nil
                     {
                         if let httpResponse = response as? HTTPURLResponse

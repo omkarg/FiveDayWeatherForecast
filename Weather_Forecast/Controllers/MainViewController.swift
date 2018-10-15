@@ -17,12 +17,18 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var latlongLbl: UILabel!
     @IBOutlet weak var noData_lbl: UILabel!
     @IBOutlet weak var retryButton: UIButton!
-    
     @IBOutlet weak var forecast_tablView: UITableView!
+    var refreshTimer:Timer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cityLbl.text = city
         self.countryLbl.text = countryCode
+        refreshTimer = Timer.scheduledTimer(timeInterval: kRefreshInterval, target: self, selector: #selector(self.refreshData), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.view.showBlurLoader()
         if shouldGetNewData() {
             getForecastData()
@@ -32,8 +38,17 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        refreshTimer.invalidate()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @objc func refreshData() {
+        getForecastData()
     }
     
     func shouldGetNewData() -> Bool {
@@ -48,13 +63,16 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func getForecastData() {
         NetworkManager.shared.get5DayWeatherForecast { (jsonDictionary, error) in
             if error == nil{
-                CoreDataManager.shared.saveJSONToCoreData(jsonDictionary: jsonDictionary! as [String : AnyObject], completion: { (result) in
-                    if result == true
-                    {
-                        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: kRefreshTime)
-                        self.setData()
-                    }
-                })}
+                if jsonDictionary != nil
+                {
+                    CoreDataManager.shared.saveJSONToCoreData(jsonDictionary: jsonDictionary! as [String : AnyObject], completion: { (result) in
+                        if result == true
+                        {
+                            UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: kRefreshTime)
+                            self.setData()
+                        }
+                    })}
+            }
             else {
                 self.handleError(error: error!)
             }

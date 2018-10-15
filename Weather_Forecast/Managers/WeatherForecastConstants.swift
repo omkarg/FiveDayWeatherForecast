@@ -9,19 +9,20 @@
 import Foundation
 import UIKit
 
+//MARK: Constant declaration
 let city = "mumbai"
 let countryCode = "IN"
 let apiKey = "6022296ba2cc4d976ac7111978e224ec"
 let domain = "http://api.openweathermap.org"
 
 let kRefreshTime = "refreshTime"
-let kRefreshInterval = 300.0 // 5 min interval (5X60=300)
+let kRefreshInterval = 300.0 //in seconds, 5 min interval (5X60=300)
 
 //API Endpoints
 let fiveDayWeatherForecastURL = "\(domain)/data/2.5/forecast?q=\(city),\(countryCode)&APPID=\(apiKey)"
 
 
-
+//MARK: Helpers Methods
 extension UIView{
     func showBlurLoader(){
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
