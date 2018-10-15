@@ -27,5 +27,4 @@ Use XCode to run, build and test the code:
 * Unit Test cases
 * Downloading weather icons
 * Delete old data
-* Device date/time is used for calculating 5 min difference in two app launches depending on which the weather forecast data is refreshed  , in proper situation we can get the date/time from server. Because in current scenario if we change the date in settings it will refresh irrespective of the 5 min logic that is currently applied
-* Data refresh logic every 5 min or as per required time interval.
+* Device date/time is used for calculating 5 min difference in two app launches depending on which the weather forecast data is refreshed  , in proper situation we can get the date/time from server. Because in current scenario if we change the date in settings it will refresh irrespective of the 5 min logic that is currently applied.
