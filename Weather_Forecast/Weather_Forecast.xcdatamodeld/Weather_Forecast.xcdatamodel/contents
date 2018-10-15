@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CityInfo" representedClassName=".CityInfo" syncable="YES">
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="latlong" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationInfo" syncable="YES"/>
+    </entity>
+    <entity name="ForecastDetails" representedClassName=".ForecastDetails" syncable="YES">
+        <attribute name="cloudiness" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rain" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="snow" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sys" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unixDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="main" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TemperatureInfo" syncable="YES"/>
+        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WeatherInfo" syncable="YES"/>
+        <relationship name="wind" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WindInfo" syncable="YES"/>
+    </entity>
+    <entity name="ForecastInfo" representedClassName=".ForecastInfo" syncable="YES">
+        <attribute name="cod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityInfo" syncable="YES"/>
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForecastDetails" syncable="YES"/>
+    </entity>
+    <entity name="LocationInfo" representedClassName=".LocationInfo" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="TemperatureInfo" representedClassName=".TemperatureInfo" syncable="YES">
+        <attribute name="groundLevel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="seaLevel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="temp_max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="temp_min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tempKf" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="WeatherInfo" representedClassName=".WeatherInfo" syncable="YES">
+        <attribute name="descp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="main" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="WindInfo" representedClassName=".WindInfo" syncable="YES">
+        <attribute name="degree" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CityInfo" positionX="-279" positionY="117" width="128" height="103"/>
+        <element name="ForecastDetails" positionX="-252" positionY="-252" width="128" height="193"/>
+        <element name="ForecastInfo" positionX="-414" positionY="-54" width="128" height="118"/>
+        <element name="LocationInfo" positionX="-108" positionY="171" width="128" height="73"/>
+        <element name="TemperatureInfo" positionX="-45" positionY="-450" width="128" height="163"/>
+        <element name="WeatherInfo" positionX="52" positionY="-180" width="128" height="103"/>
+        <element name="WindInfo" positionX="97" positionY="-0" width="128" height="73"/>
+    </elements>
+</model>
